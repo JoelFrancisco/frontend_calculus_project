@@ -4,7 +4,9 @@ import { useRouter } from 'next/router';
 import { useState, ChangeEvent, useEffect, useContext } from 'react';
 import { AppContext } from './_app';
 import { rule_of_sarrus } from '../utils/rule_of_sarrus';
+import BackButton from '../components/backButton';
 import styled from 'styled-components';
+import { validateMatrix } from '../utils/isMatrixValid';
 
 export const Container = styled.div`
   height: 100vh;
@@ -42,9 +44,22 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 3rem;
-  height: 1rem;
-  margin-top: 20px;
+  width: 5rem;
+  height: 1.5rem;
+  margin-top: 40px;
+  background-color: #2B2D42;
+  border-radius: 10px;
+  border: 1.5px solid #2B2D42;
+  padding: 5px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #EDF2F4;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: #EDF2F4;
+    color: #2B2D42;
+  }
 `;
 
 
@@ -57,48 +72,50 @@ const Matrix3by3: NextPage = () => {
   
   return (
     <Container>
+      <BackButton />
+
       <Grid>
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[0][0] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[0][1] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[0][2] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[1][0] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[1][1] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[1][2] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[2][0] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[2][1] = Number(event.target.value);
           setValues(values);
         }}/>
 
-        <Input onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        <Input onChange={(event) => {
           values[2][2] = Number(event.target.value);
           setValues(values);
         }}/>
@@ -107,10 +124,18 @@ const Matrix3by3: NextPage = () => {
       <Button onClick={(event) => {
         event.preventDefault();
         
+        const isMatrixValid = validateMatrix(values);
+
+        if (!isMatrixValid) {
+          return;
+        }
+
         setMainState(rule_of_sarrus(values));
-        
+
         router.push("/result");
-      }}></Button>
+      }}>
+        CALCULAR
+      </Button>
     </Container>
   )
 }
