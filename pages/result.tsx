@@ -16,15 +16,23 @@ const Result: NextPage = () => {
   
   useEffect(() => {
     const { steps } = mainState
-    setSteps(steps);
+    
+    let id = 1;
+    const enumerated_steps = steps.map((x: any) => {
+      const value = [id, x];
+      id++;
+      return value;
+    });
+
+    setSteps(enumerated_steps);
   }, []);
 
   return (
     <Container>
       <BackButton />
 
-      { steps.length > 0 ? steps.map((step) => (
-        <MathJax>{step}</MathJax>
+      { steps.length > 0 ? steps.map(([id, step]) => (
+        <MathJax key={id}>{step}</MathJax>
       )): null}
     </Container>
   )
