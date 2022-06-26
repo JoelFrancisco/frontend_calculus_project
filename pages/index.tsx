@@ -26,6 +26,10 @@ const Home: NextPage = () => {
         <Link href='/matrix3by3'>
           <Option>Matriz 3x3</Option>      
         </Link>
+
+        <Link href='/quadraticEquation'>
+          <Option>Equação do segundo grau</Option>      
+        </Link>
       </Navbar>
     </Container>
   )

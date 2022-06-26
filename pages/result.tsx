@@ -12,17 +12,10 @@ const Result: NextPage = () => {
   
   const [steps, setSteps] = useState([]);
 
-  const router = useRouter();
-  
   useEffect(() => {
     const { steps } = mainState
     
-    let id = 1;
-    const enumerated_steps = steps.map((x: any) => {
-      const value = [id, x];
-      id++;
-      return value;
-    });
+    const enumerated_steps = steps.map((x: any, index: number) => [index + 1, x]);
 
     setSteps(enumerated_steps);
   }, []);
