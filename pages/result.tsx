@@ -3,9 +3,17 @@ import { MathJax } from 'better-react-mathjax';
 import { withRouter, useRouter } from 'next/router';
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from './_app';
-import { Container } from './matrix3by3';
 import BackButton from '../components/backButton';
 import styled from 'styled-components';
+
+export const Container = styled.div`
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Result: NextPage = () => {
   const { mainState } = useContext(AppContext);
