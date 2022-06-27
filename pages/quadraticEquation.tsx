@@ -71,17 +71,17 @@ const QuadraticEquation: NextPage = () => {
       <BackButton />
 
       <Wrapper>
-        <Label>a: </Label>
+        <Label>Coeficiente a: </Label>
         <Input onChange={(event) => setA(Number(event.target.value))}/>
       </Wrapper>
 
       <Wrapper>
-        <Label>b: </Label>
+        <Label>Coeficiente b: </Label>
         <Input onChange={(event) => setB(Number(event.target.value))}/>
       </Wrapper>
 
       <Wrapper>
-        <Label>c: </Label>
+        <Label>Coeficiente c: </Label>
         <Input onChange={(event) => setC(Number(event.target.value))}/>
       </Wrapper>
       

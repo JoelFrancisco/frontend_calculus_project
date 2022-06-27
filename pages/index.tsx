@@ -24,7 +24,11 @@ const Home: NextPage = () => {
     <Container>
       <Navbar>
         <Link href='/matrix3by3'>
-          <Option>Matriz 3x3</Option>      
+          <Option>Determinante matriz 3x3</Option>      
+        </Link>
+
+        <Link href='/matrix4by4'>
+          <Option>Determinante matriz 4x4</Option>      
         </Link>
 
         <Link href='/quadraticEquation'>
