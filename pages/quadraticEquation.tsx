@@ -8,6 +8,7 @@ import BackButton from '../components/backButton';
 import styled from 'styled-components';
 import { validateMatrix } from '../utils/isMatrixValid';
 import { quadraticFormula } from '../utils/quadraticFormula';
+import { MathJax } from 'better-react-mathjax';
 
 export const Container = styled.div`
   height: 100vh;
@@ -64,6 +65,10 @@ export const Erro = styled.div`
   transition: 0.5s;
 `;
 
+const MathJaxContainer = styled.div`
+  margin-top: 10px;
+`;
+
 const QuadraticEquation: NextPage = () => {
   const [a, setA] = useState<number>();
   const [b, setB] = useState<number>();
@@ -71,6 +76,9 @@ const QuadraticEquation: NextPage = () => {
   const [showError, setShowError] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   
+  const [showDeltaError, setShowDeltaError] = useState<boolean>(false);
+  const [deltaError, setDeltaError] = useState<string[]>([""]);
+
   const { setMainState } = useContext(AppContext);
   
   const router = useRouter();
@@ -133,6 +141,7 @@ const QuadraticEquation: NextPage = () => {
         const delta = (b**2)-4*a*c;
 
         if (delta < 0) {
+          setDeltaError([`\\[\\delta = ${b}^2 -4\\cdot${a}\\${c} > 0\\]`])
           setError("O delta deve ser maior ou igual a zero");
           setShowError(true);
           return;
@@ -143,6 +152,12 @@ const QuadraticEquation: NextPage = () => {
       }}>
         CALCULAR
       </Button>
+
+      {showDeltaError ? (
+        <MathJaxContainer>
+          <MathJax>{}</MathJax>
+        </MathJaxContainer>
+      ): null}
 
       {showError ? (
         <Erro>{error}</Erro>
