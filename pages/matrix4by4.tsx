@@ -8,6 +8,7 @@ import BackButton from '../components/backButton';
 import styled from 'styled-components';
 import { validateMatrix, validateMatrixIsFourByFour } from '../utils/isMatrixValid';
 import { laplaceTheorem } from '../utils/laplaceTheorem';
+import { Erro } from './quadraticEquation';
 
 export const Container = styled.div`
   height: 100vh;
@@ -70,91 +71,142 @@ const Matrix4by4: NextPage = () => {
   const { setMainState } = useContext(AppContext);
   
   const router = useRouter();
+
+  const [showError, setShowError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   
   return (
     <Container>
       <BackButton />
 
       <Grid>
-        <Input onChange={(event) => {
-          values[0][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[0][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[0][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[0][3] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][3] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][3] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][3] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][3] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][3] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[3][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[3][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[3][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[3][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[3][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[3][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[3][3] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[3][3] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
       </Grid>
       
       <Button onClick={(event) => {
@@ -163,6 +215,8 @@ const Matrix4by4: NextPage = () => {
         const isMatrixValid = validateMatrixIsFourByFour(values);
 
         if (!isMatrixValid) {
+          setError("A matriz deve não pode possuir elementos indefinidos");
+          setShowError(true);
           return;
         }
 
@@ -172,6 +226,10 @@ const Matrix4by4: NextPage = () => {
       }}>
         CALCULAR
       </Button>
+
+      {showError ? (
+        <Erro>{error}</Erro>
+      ) : null}
     </Container>
   )
 }

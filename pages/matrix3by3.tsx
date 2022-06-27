@@ -7,6 +7,7 @@ import { rule_of_sarrus } from '../utils/rule_of_sarrus';
 import BackButton from '../components/backButton';
 import styled from 'styled-components';
 import { validateMatrix } from '../utils/isMatrixValid';
+import { Erro } from './quadraticEquation';
 
 export const Container = styled.div`
   height: 100vh;
@@ -69,56 +70,86 @@ const Matrix3by3: NextPage = () => {
   const { setMainState } = useContext(AppContext);
   
   const router = useRouter();
+
+  const [showError, setShowError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   
   return (
     <Container>
       <BackButton />
 
       <Grid>
-        <Input onChange={(event) => {
-          values[0][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[0][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[0][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[0][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[1][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[1][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][0] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][0] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][1] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][1] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
 
-        <Input onChange={(event) => {
-          values[2][2] = Number(event.target.value);
-          setValues(values);
-        }}/>
+        <Input 
+          onChange={(event) => {
+            values[2][2] = Number(event.target.value);
+            setValues(values);
+          }}
+          onClick={() => setShowError(false)}
+        />
       </Grid>
       
       <Button onClick={(event) => {
@@ -127,6 +158,8 @@ const Matrix3by3: NextPage = () => {
         const isMatrixValid = validateMatrix(values);
 
         if (!isMatrixValid) {
+          setError("A matriz deve não pode possuir elementos indefinidos");
+          setShowError(true);
           return;
         }
 
@@ -136,6 +169,10 @@ const Matrix3by3: NextPage = () => {
       }}>
         CALCULAR
       </Button>
+
+      {showError ? (
+        <Erro>{error}</Erro>
+      ) : null}
     </Container>
   )
 }

@@ -56,11 +56,20 @@ const Wrapper = styled.div`
   gap: 15px;
 `;
 
+export const Erro = styled.div`
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 15px;
+  color: #a80b0b;
+  transition: 0.5s;
+`;
 
 const QuadraticEquation: NextPage = () => {
   const [a, setA] = useState<number>();
   const [b, setB] = useState<number>();
   const [c, setC] = useState<number>();
+  const [showError, setShowError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   
   const { setMainState } = useContext(AppContext);
   
@@ -72,29 +81,72 @@ const QuadraticEquation: NextPage = () => {
 
       <Wrapper>
         <Label>Coeficiente a: </Label>
-        <Input onChange={(event) => setA(Number(event.target.value))}/>
+        <Input 
+          onChange={(event) => setA(Number(event.target.value))}
+          onClick={() => setShowError(false)}
+        />
       </Wrapper>
 
       <Wrapper>
         <Label>Coeficiente b: </Label>
-        <Input onChange={(event) => setB(Number(event.target.value))}/>
+        <Input 
+          onChange={(event) => setB(Number(event.target.value))}
+          onClick={() => setShowError(false)}
+        />
       </Wrapper>
 
       <Wrapper>
         <Label>Coeficiente c: </Label>
-        <Input onChange={(event) => setC(Number(event.target.value))}/>
+        <Input 
+          onChange={(event) => setC(Number(event.target.value))}
+          onClick={() => setShowError(false)}
+        />
       </Wrapper>
       
       <Button onClick={(event) => {
         event.preventDefault();
 
-        if (a && b && c && a > 0 && (b**2)-4*a*c >= 0) {
-          setMainState(quadraticFormula(a, b, c));
-          router.push("/result");
+        if (!a) {
+          setError("O valor de A não pode ser indefinido")
+          setShowError(true);
+          return;
         }
+
+        if (!b) {
+          setError("O valor de B não pode ser indefinido")
+          setShowError(true);
+          return;
+        }
+
+        if (!c) {
+          setError("O valor de C não pode ser indefinido")
+          setShowError(true);
+          return;
+        }
+
+        if (a === 0) {
+          setError("O coeficiente A não pode ser zero")
+          setShowError(true);
+          return;
+        }
+
+        const delta = (b**2)-4*a*c;
+
+        if (delta < 0) {
+          setError("O delta deve ser maior ou igual a zero");
+          setShowError(true);
+          return;
+        }
+
+        setMainState(quadraticFormula(a, b, c));
+        router.push("/result");
       }}>
         CALCULAR
       </Button>
+
+      {showError ? (
+        <Erro>{error}</Erro>
+      ) : null}
     </Container>
   )
 }

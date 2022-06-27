@@ -13,6 +13,7 @@ const Container = styled.div`
 const Navbar = styled.nav`
   display: flex;
   flex-direction: column;  
+  font-size: 1.5rem;
 `
 
 const Option = styled.a`
