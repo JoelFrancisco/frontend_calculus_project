@@ -78,6 +78,7 @@ const QuadraticEquation: NextPage = () => {
   
   const [showDeltaError, setShowDeltaError] = useState<boolean>(false);
   const [deltaError, setDeltaError] = useState<string[]>([""]);
+  const [delta, setDelta] = useState<number>(0);
 
   const { setMainState } = useContext(AppContext);
   
@@ -91,7 +92,10 @@ const QuadraticEquation: NextPage = () => {
         <Label>Coeficiente a: </Label>
         <Input 
           onChange={(event) => setA(Number(event.target.value))}
-          onClick={() => setShowError(false)}
+          onClick={() => {
+            setShowError(false)
+            setShowDeltaError(false)
+          }}
         />
       </Wrapper>
 
@@ -99,7 +103,10 @@ const QuadraticEquation: NextPage = () => {
         <Label>Coeficiente b: </Label>
         <Input 
           onChange={(event) => setB(Number(event.target.value))}
-          onClick={() => setShowError(false)}
+          onClick={() => { 
+            setShowError(false) 
+            setShowDeltaError(false)
+          }}
         />
       </Wrapper>
 
@@ -107,12 +114,21 @@ const QuadraticEquation: NextPage = () => {
         <Label>Coeficiente c: </Label>
         <Input 
           onChange={(event) => setC(Number(event.target.value))}
-          onClick={() => setShowError(false)}
+          onClick={() => {
+            setShowError(false)
+            setShowDeltaError(false)
+          }}
         />
       </Wrapper>
       
       <Button onClick={(event) => {
         event.preventDefault();
+
+        if (a === 0) {
+          setError("O coeficiente A não pode ser zero")
+          setShowError(true);
+          return;
+        }
 
         if (!a) {
           setError("O valor de A não pode ser indefinido")
@@ -132,16 +148,12 @@ const QuadraticEquation: NextPage = () => {
           return;
         }
 
-        if (a === 0) {
-          setError("O coeficiente A não pode ser zero")
-          setShowError(true);
-          return;
-        }
-
         const delta = (b**2)-4*a*c;
 
         if (delta < 0) {
-          setDeltaError([`\\[\\delta = ${b}^2 -4\\cdot${a}\\${c} > 0\\]`])
+          //setDeltaError([`\\[\\delta = ${b}^2 -4\\cdot${a}\\${c} > 0\\]`])
+          setDelta(delta);
+          setShowDeltaError(true);
           setError("O delta deve ser maior ou igual a zero");
           setShowError(true);
           return;
@@ -155,7 +167,8 @@ const QuadraticEquation: NextPage = () => {
 
       {showDeltaError ? (
         <MathJaxContainer>
-          <MathJax>{}</MathJax>
+          <MathJax>{"\\[\\Delta=b^2-4ac\\]"}</MathJax>
+          <MathJax>{`\\[\\Delta=${delta}\\]`}</MathJax>
         </MathJaxContainer>
       ): null}
 
