@@ -22,21 +22,21 @@ const Option = styled.a`
 
 const Home: NextPage = () => {
   return (
-    <Container>
-      <Navbar>
+    <div className="index-container">
+      <nav className="index-navbar">
         <Link href='/matrix3by3'>
-          <Option>Determinante matriz 3x3</Option>      
+          <a className="index-option">Determinante matriz 3x3</a>      
         </Link>
 
         <Link href='/matrix4by4'>
-          <Option>Determinante matriz 4x4</Option>      
+          <a className="index-option">Determinante matriz 4x4</a>      
         </Link>
 
         <Link href='/quadraticEquation'>
-          <Option>Equação do segundo grau</Option>      
+          <a className="index-option">Equação do segundo grau</a>      
         </Link>
-      </Navbar>
-    </Container>
+      </nav>
+    </div>
   )
 }
 

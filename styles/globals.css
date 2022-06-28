@@ -14,3 +14,22 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.index-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-navbar {
+  display: flex;
+  flex-direction: column;  
+  font-size: 1.5rem;
+}
+
+.index-option {
+  font-weight: bold;
+}
+
